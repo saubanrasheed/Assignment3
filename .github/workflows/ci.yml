@@ -1,0 +1,24 @@
+name: CI/CD Pipeline
+
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build-and-test:
+    runs-on: windows-latest  # Uses a Windows environment
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Java
+        uses: actions/setup-java@v3
+        with:
+          java-version: '17'  # Your system uses Java 17
+
+      - name: Run Tests
+        run: |
+          gradlew.bat clean test  # Ensure this matches your project setup
+        shell: cmd
